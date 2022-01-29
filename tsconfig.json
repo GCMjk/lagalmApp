@@ -2,7 +2,27 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src/app",
+    "paths": {
+      "@lgm-app/*": [
+        "@lgm-app/*"
+      ],
+      "@lgm-app-admin/*": [
+        "@lgm-app/admin/*"
+      ],
+      "@lgm-app-employee/*": [
+        "@lgm-app/employee/*"
+      ],
+      "@lgm-app-core/*": [
+        "@lgm-app/core/*"
+      ],
+      "@lgm-web/*": [
+        "@lgm-web/*"
+      ],
+      "@lgm-web-core/*": [
+        "@lgm-web/core/*"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,

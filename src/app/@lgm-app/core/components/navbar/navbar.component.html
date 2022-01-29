@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-around">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link"
+                [routerLink]="['/app']">
+                    <img width="30px" src="https://lagalm.mx/assets/isologo.png">
+            </a>
+        </li>
+    </ul>
+    <ul class="nav" *ngIf="!login">
+        <li class="nav-item">
+            <a class="nav-link"
+                [routerLink]="['/app/admin']">
+                    LogIn
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+                [routerLink]="['/app/admin']">
+                    SignUp
+            </a>
+        </li>
+    </ul>
+    <ul class="nav" *ngIf="login">
+        <li class="nav-item">
+            <a class="nav-link"
+                [routerLink]="['/app/employee']">
+                    Employee
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+                [routerLink]="['/app/admin']">
+                    Admin
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+                [routerLink]="['/app/admin/users']">
+                    Admin Users
+            </a>
+        </li>
+    </ul>
+</div>
