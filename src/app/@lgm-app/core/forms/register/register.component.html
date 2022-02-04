@@ -1,0 +1,160 @@
+<div class="container">
+    <form class="row" [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm.value)">
+    
+        <!-- LogIn -->
+        <p class="display-2">
+            Registro
+        </p>
+
+    
+        <!-- Name -->
+        <div class="col-12 col-md-6 mb-3">
+            <label for="name" class="form-label">
+                Nombre
+            </label>
+            <input class="form-control" type="text" placeholder="Introduzca el nombre"
+                formControlName="name"
+                [ngClass]="{ 'is-invalid': controls['name'].invalid && (controls['name'].dirty || controls['name'].touched) }">
+            <!-- Errors validators -->
+            <div class="invalid-feedback"
+                *ngIf="controls['name'].invalid && (controls['name'].dirty || controls['name'].touched)">
+                    <div *ngIf="controls['name'].errors?.['required']">
+                        Nombre obligatorio
+                    </div>
+            </div>
+        </div>
+        <!-- Lastname -->
+        <div class="col-12 col-md-6 mb-3">
+            <label for="lastname" class="form-label">
+                Apellidos
+            </label>
+            <input class="form-control" type="text" placeholder="Introduzca sus apellidos"
+                formControlName="lastname"
+                [ngClass]="{ 'is-invalid': controls['lastname'].invalid && (controls['lastname'].dirty || controls['lastname'].touched) }">
+            <!-- Errors validators -->
+            <div class="invalid-feedback"
+                *ngIf="controls['lastname'].invalid && (controls['lastname'].dirty || controls['lastname'].touched)">
+                    <div *ngIf="controls['lastname'].errors?.['required']">
+                        Apellido obligatorio
+                    </div>
+            </div>
+        </div>
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label">
+                Correo
+            </label>
+            <input class="form-control" type="email" placeholder="Introduzca su correo"
+                formControlName="email"
+                [ngClass]="{ 'is-invalid': controls['email'].invalid && (controls['email'].dirty || controls['email'].touched) }">
+            <!-- Errors validators -->
+            <div class="invalid-feedback"
+                *ngIf="controls['email'].invalid && (controls['email'].dirty || controls['email'].touched)">
+                    <div *ngIf="controls['email'].errors?.['required']">
+                        Introduzca un correo para ingresar
+                    </div>
+                    <div *ngIf="controls['email'].errors?.['pattern']">
+                        Introduzca una dirección de correo valida
+                    </div>
+            </div>
+        </div>
+        <!-- Password -->
+        <div class="mb-3">
+            <label for="password" class="form-label">
+                Contraseña
+            </label>
+            <input class="form-control" type="password" placeholder="Introduzca su contraseña"
+                formControlName="password"
+                [ngClass]="{ 'is-invalid': controls['password'].invalid && (controls['password'].dirty || controls['password'].touched) }">
+            <!-- Errors validators -->
+            <div class="invalid-feedback"
+                *ngIf="controls['password'].invalid && (controls['password'].dirty || controls['password'].touched)">
+                    <div *ngIf="controls['password'].errors?.['required']">
+                        Introduzca una contraseña para ingresar
+                    </div>
+                    <div *ngIf="controls['password'].errors?.['minlength']">
+                        La cotraseña es mayor a {{ minCharacters }} carácteres
+                    </div>
+            </div>
+        </div>
+        <!-- Rol -->
+        <div class="col-12 col-md-6 mb-3">
+            <label for="rol" class="form-label">
+                Permisos
+            </label>
+            <select class="form-select"
+                [ngClass]="{ 'is-invalid': controls['rol'].invalid && (controls['rol'].dirty || controls['rol'].touched) }"
+                formControlName="rol" aria-label="Default select example">
+                    <option [ngValue]="null">
+                        Selecciona una opción
+                    </option>
+                    <option *ngFor="let rol of roles" [value]="rol">
+                        {{ rol.charAt(0).toUpperCase() + rol.substr(1).toLowerCase() }}
+                    </option>
+            </select>
+            <!-- Errors validators -->
+            <div class="invalid-feedback"
+                *ngIf="controls['rol'].invalid && (controls['rol'].dirty || controls['rol'].touched)">
+                Elija una opción
+            </div>
+        </div>
+        <!-- Area -->
+        <div class="col-12 col-md-6 mb-3">
+            <label for="rol" class="form-label">
+                Area de trabajo
+            </label>
+            <select class="form-select"
+                [ngClass]="{ 'is-invalid': controls['area'].invalid && (controls['area'].dirty || controls['area'].touched) }"
+                formControlName="area" aria-label="Default select example">
+                    <option [ngValue]="null">
+                        Selecciona una opción
+                    </option>
+                    <option *ngFor="let area of areas" [value]="area.name">
+                        {{ area.name }}
+                    </option>
+            </select>
+            <!-- Errors validators -->
+            <div class="invalid-feedback"
+                *ngIf="controls['area'].invalid && (controls['area'].dirty || controls['area'].touched)">
+                    Elija una opción
+            </div>
+        </div>
+        <!-- Phone -->
+        <div class="col-12 col-md-6 mb-3">
+            <label for="phone" class="form-label">
+                Teléfono
+            </label>
+            <input class="form-control" type="text" placeholder="Teléfono"
+                    formControlName="phone"
+                    [ngClass]="{ 'is-invalid': controls['phone'].invalid && (controls['phone'].dirty || controls['phone'].touched) }">
+                <!-- Errors validators -->
+                <div class="invalid-feedback"
+                    *ngIf="controls['phone'].invalid && (controls['phone'].dirty || controls['phone'].touched)">
+                        <div *ngIf="controls['phone'].errors?.['required'] || controls['phone'].errors?.['pattern']">
+                            Introduzca numeros
+                        </div> 
+                        <div *ngIf="controls['phone'].errors?.['minlength']">
+                            Mayor a 8 digitos
+                        </div>
+                        <div *ngIf="controls['phone'].errors?.['maxlength']">
+                            Menor a 10 digitos
+                        </div>
+                </div>
+        </div>
+        <!-- Profile -->
+        <!-- <div class="col-12 col-md-6 mb-3">
+            <label for="profile" class="form-label">
+                Foto de perfil
+            </label>
+            <input class="form-control" type="file"
+                formControlName="profile">
+        </div> -->
+        
+
+        <!-- Register -->
+        <button type="submit" [disabled]="!registerForm.valid" class="btn btn-success mb-3">
+            Registrar
+        </button>
+
+    </form>
+</div>

@@ -1,44 +1,51 @@
-<div class="d-flex justify-content-around">
-    <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link"
-                [routerLink]="['/app']">
-                    <img width="30px" src="https://lagalm.mx/assets/isologo.png">
-            </a>
-        </li>
-    </ul>
-    <ul class="nav" *ngIf="!login">
-        <li class="nav-item">
-            <a class="nav-link"
-                [routerLink]="['/app/admin']">
-                    LogIn
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link"
-                [routerLink]="['/app/admin']">
-                    SignUp
-            </a>
-        </li>
-    </ul>
-    <ul class="nav" *ngIf="login">
-        <li class="nav-item">
-            <a class="nav-link"
-                [routerLink]="['/app/employee']">
-                    Employee
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link"
-                [routerLink]="['/app/admin']">
-                    Admin
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link"
-                [routerLink]="['/app/admin/users']">
-                    Admin Users
-            </a>
-        </li>
-    </ul>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand" [routerLink]="['/app']">
+            <img src="https://lagalm.mx/assets/isologo.png" width="30">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav d-flex align-items-center ms-auto" *ngIf="logged; else login">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="rounded-circle me-2" width="30px"
+                            [src]="userInfo.photo || 'https://freepikpsd.com/file/2019/10/default-profile-picture-png-1-Transparent-Images.png'">
+                        <strong>{{ userInfo.name + ' ' + userInfo.lastname }}</strong>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <h6 class="dropdown-header">
+                            {{ userInfo.email }}
+                        </h6>
+                        <li *ngIf="userInfo.rol === 'admin'"><a [routerLink]="['/app/admin']" class="dropdown-item">
+                            Admin
+                        </a></li>
+                        <li *ngIf="userInfo.rol === 'gerente' || userInfo.rol === 'admin'"><a [routerLink]="['/app/admin']" class="dropdown-item">
+                            Gerente
+                        </a></li>
+                        <li><a [routerLink]="['/app/employee/profile']" class="dropdown-item">
+                            Perfil
+                        </a></li>
+                        <li><a href="#" class="dropdown-item text-danger" (click)="logout()">
+                            Salir <i class="uil uil-sign-out-alt"></i>
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ng-template #login>
+                <ul class="navbar-nav d-flex ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/app/login']">
+                            Iniciar sesión
+                        </a>
+                    </li>
+                </ul>
+            </ng-template>
+
+        </div>
+    </div>
+</nav>
