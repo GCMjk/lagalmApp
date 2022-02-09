@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '@lgm-app/core/services/auth.service';
 import { FirestoreService } from '@lgm-app/core/services/firestore.service';
-import { IUser } from '@lgm-app/core/interface/user.interface';
+import { AuthService } from '@lgm-app/core/services/auth.service';
+import { IRegisterUser } from '@lgm-app/core/interface/auth.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -15,17 +15,30 @@ export class NavbarComponent implements OnInit {
 
   logged:boolean = false;
   uid = null! as string;
-  userInfo: IUser = {
+  userInfo: IRegisterUser = null!
+  /* userInfo: IRegisterUser = {
     uid: '',
     name: '',
     lastname: '',
+    birthday: '',
+    phone: 0,
     email: '',
     password: '',
-    phone: '',
+    domicilio: '',
+    curp: '',
+    rfc: '',
+    civilStatus: '',
+    scholarship: '',
+    accountNumber: 0,
+    employeeNumber: 0,
+    securityNumber: 0,
+    infonavit: false,    
+    emergencyNumber: 0,
     photo: '',
-    rol: 'user',
-    area: ''
-  };
+    rol: 'operator',
+    area: '',
+    jobDescription: ''
+  }; */
   constructor( private authService: AuthService,
               private firestore: FirestoreService,
               // private sweetAlert: string,
@@ -55,7 +68,7 @@ export class NavbarComponent implements OnInit {
   getUserInfo() {
     const path = 'Usuarios';
     const id = this.uid;
-    this.firestore.getDoc<IUser>(path, id).subscribe( res => {
+    this.firestore.getDoc<IRegisterUser>(path, id).subscribe( res => {
       if(res) {
         this.userInfo = res;
       }

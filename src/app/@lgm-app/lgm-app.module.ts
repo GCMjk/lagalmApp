@@ -1,26 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { LgmAppRoutingModule } from './lgm-app-routing.module';
+import { CoreModule } from './core/core.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-
-import { LgmAppRoutingModule } from './lgm-app-routing.module';
-import { LgmAppComponent } from './lgm-app.component';
-import { NavbarComponent } from '@lgm-app-core/components/navbar/navbar.component';
-import { HeaderComponent } from '@lgm-app-core/components/header/header.component';
-
 import { environment } from '../../environments/environment';
+import { LgmAppComponent } from './lgm-app.component';
 
 
 @NgModule({
   declarations: [
-    LgmAppComponent,
-    NavbarComponent,
-    HeaderComponent
+    LgmAppComponent
   ],
   imports: [
     CommonModule,
     LgmAppRoutingModule,
+    CoreModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule

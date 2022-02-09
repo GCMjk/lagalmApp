@@ -7,11 +7,8 @@
       "@lgm-app/*": [
         "@lgm-app/*"
       ],
-      "@lgm-app-admin/*": [
-        "@lgm-app/admin/*"
-      ],
-      "@lgm-app-employee/*": [
-        "@lgm-app/employee/*"
+      "@lgm-app-modules/*": [
+        "@lgm-app/modules/*"
       ],
       "@lgm-app-core/*": [
         "@lgm-app/core/*"

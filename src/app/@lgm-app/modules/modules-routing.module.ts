@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LgmAppComponent } from './lgm-app.component';
 
 const routes: Routes = [
   {
-    path: 'app',
-    component: LgmAppComponent,
+    path: '',
     children: [
       {
         path: '',
-        loadChildren: () => import('./modules/modules.module').then(m => m.ModulesModule)
+        loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+      },
+      {
+        path: 'rrhh',
+        loadChildren: () => import('./rrhh/rrhh.module').then(m => m.RrhhModule)
       }
     ]
   }
@@ -19,4 +21,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class LgmAppRoutingModule { }
+export class ModulesRoutingModule { }

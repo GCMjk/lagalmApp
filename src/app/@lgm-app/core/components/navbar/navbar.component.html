@@ -27,7 +27,7 @@
                         <li *ngIf="userInfo.rol === 'gerente' || userInfo.rol === 'admin'"><a [routerLink]="['/app/admin']" class="dropdown-item">
                             Gerente
                         </a></li>
-                        <li><a [routerLink]="['/app/employee/profile']" class="dropdown-item">
+                        <li><a [routerLink]="['/app/profile']" class="dropdown-item">
                             Perfil
                         </a></li>
                         <li><a href="#" class="dropdown-item text-danger" (click)="logout()">
@@ -39,7 +39,7 @@
             <ng-template #login>
                 <ul class="navbar-nav d-flex ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/app/login']">
+                        <a class="nav-link" [routerLink]="['/app']">
                             Iniciar sesión
                         </a>
                     </li>

@@ -1,0 +1,35 @@
+<form class="row" [formGroup]="areaForm" (ngSubmit)="saveArea(areaForm.value)">
+    
+    <!-- Add area -->
+    <p class="display-2">
+        Agregar un area
+    </p>
+
+    <div class="mb-3">
+        <label for="area" class="form-label">
+            Area
+        </label>
+        <input class="form-control" type="text" placeholder="Introduzca el nombre de la area"
+            formControlName="area"
+            [ngClass]="{ 'is-invalid': controls['area'].invalid && (controls['area'].dirty || controls['area'].touched) }">
+        <!-- Errors validators -->
+        <div class="invalid-feedback"
+            *ngIf="controls['area'].invalid && (controls['area'].dirty || controls['area'].touched)">
+                <div *ngIf="controls['area'].errors?.['required']">
+                    Ingrese el nombre de una nueva area
+                </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="description">
+            Descripción
+        </label>
+        <textarea class="form-control" rows="3"
+            formControlName="description"></textarea>
+    </div>
+
+    <button type="submit" [disabled]="!areaForm.valid" class="btn btn-primary col-12">
+        Submit
+    </button>
+    
+</form>
