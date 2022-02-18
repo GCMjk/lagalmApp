@@ -1,0 +1,13 @@
+<label class="form-label" for="birthday">
+    Fecha de nacimiento
+</label>
+<div class="input-group" [formGroup]="parent">
+    <input class="form-control" type="text"
+        formControlName="birthday"
+        placeholder="Seleccione su fecha"
+        ngbDatepicker #d="ngbDatepicker"
+        (click)="d.toggle()"
+        (ngModelChange)="selectDateChange()"
+        [minDate]="minDate" [maxDate]="maxDate"/>
+    <span class="input-group-text uil uil-calendar-alt"></span>
+</div>

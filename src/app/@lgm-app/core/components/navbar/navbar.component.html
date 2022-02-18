@@ -15,16 +15,16 @@
                     <a class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="rounded-circle me-2" width="30px"
                             [src]="userInfo.photo || 'https://freepikpsd.com/file/2019/10/default-profile-picture-png-1-Transparent-Images.png'">
-                        <strong>{{ userInfo.name + ' ' + userInfo.lastname }}</strong>
+                        <strong>{{ userInfo.name.first + ' ' + userInfo.name.last }}</strong>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                         <h6 class="dropdown-header">
                             {{ userInfo.email }}
                         </h6>
-                        <li *ngIf="userInfo.rol === 'admin'"><a [routerLink]="['/app/admin']" class="dropdown-item">
+                        <li *ngIf="userInfo.job.rol === 'admin'"><a [routerLink]="['/app/admin']" class="dropdown-item">
                             Admin
                         </a></li>
-                        <li *ngIf="userInfo.rol === 'gerente' || userInfo.rol === 'admin'"><a [routerLink]="['/app/admin']" class="dropdown-item">
+                        <li *ngIf="userInfo.job.rol === 'gerente' || userInfo.job.rol === 'admin'"><a [routerLink]="['/app/admin']" class="dropdown-item">
                             Gerente
                         </a></li>
                         <li><a [routerLink]="['/app/profile']" class="dropdown-item">

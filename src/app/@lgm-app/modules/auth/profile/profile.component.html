@@ -2,13 +2,13 @@
     <img [src]="userInfo.photo || 'https://freepikpsd.com/file/2019/10/default-profile-picture-png-1-Transparent-Images.png'" class="card-img-top" alt="...">
     <div class="card-body">
         <h4 class="card-title">
-            {{ userInfo.name + ' ' + userInfo.lastname }}
+            {{ userInfo.name.first + ' ' + userInfo.name.last }}
         </h4>
         <h5 class="card-subtitle text-muted">
-            {{ 'Area de '+userInfo.area }}
+            {{ 'Area de '+userInfo.job.area }}
         </h5>
         <span class="card-subtitle mb-2 text-muted">
-            {{ userInfo.rol.charAt(0).toUpperCase() + userInfo.rol.substr(1).toLowerCase() }}
+            {{ userInfo.job.rol.charAt(0).toUpperCase() + userInfo.job.rol.substr(1).toLowerCase() }}
         </span>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">

@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getUserInfo() {
-    const path = 'Usuarios';
+    const path = 'users';
     const id = this.uid;
     this.firestore.getDoc<IRegisterUser>(path, id).subscribe( res => {
       if(res) {

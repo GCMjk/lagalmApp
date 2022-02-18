@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 import { IRegisterUser } from '../interface/auth.interface';
 
@@ -11,7 +12,10 @@ export class AuthService {
 
   isLogged = false;
 
-  constructor(public afAuth: AngularFireAuth) {  }
+  constructor( public afAuth: AngularFireAuth,
+              public route: Router, 
+              // private sweetAlert: string
+              ) {  }
 
   login(email: string, pass: string) {
     return this.afAuth.signInWithEmailAndPassword(email, pass);
@@ -19,6 +23,10 @@ export class AuthService {
 
   register(dataUser: IRegisterUser) {
     return this.afAuth.createUserWithEmailAndPassword(dataUser.email, dataUser.password);
+  }
+
+  sendEmailVerification() {
+    return ;
   }
 
   stateUser() {
@@ -35,7 +43,12 @@ export class AuthService {
   }
 
   logout() {
-    this.afAuth.signOut();
+    return this.afAuth.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.route.navigate(['/app']);
+      // SweetAlert
+      alert('Sesión finalizada');
+    });
   }
 
 }

@@ -1,28 +1,46 @@
-export interface IRegisterUser {
-    uid: string | null;
-    name: string;
-    lastname: string;
-    birthday: string;
-    phone: string;
+export interface ILoginUser {
     email: string;
     password: string;
-    adress: string;
+}
+
+export interface IRegisterUser extends ILoginUser {
+    uid: string | null;
+    id: number;
+    name: IName;
+    birthday: IBirthday;
     curp: string;
     rfc: string;
     civilStatus: string;
     scholarship: string;
-    accountNumber: number;
-    employeeNumber: number;
+    phone: string;
+    emergencyPhone: number;
+    address: IAddress;
+    cardNumber: number;
     securityNumber: number;
-    infonavit: boolean;    
-    emergencyNumber: string;
+    infonavit: boolean;
     photo: string;
-    rol: 'empleado' | string;
-    area: string;
-    jobDescription: string;
+    job: IJob;
 }
 
-export interface ILoginUser {
-    email: string;
-    password: string;
+interface IName {
+    first: string;
+    last: string;
+}
+interface IBirthday {
+    day: number;
+    month: number;
+    year: number;
+}
+interface IAddress {
+    street: string;
+    number: number;
+    exNumber: string;
+    city: string;
+    state: string;
+    zip: number
+}
+interface IJob {
+    rol: string;
+    area: string;
+    description: string;
 }

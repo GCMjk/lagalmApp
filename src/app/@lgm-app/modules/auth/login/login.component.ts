@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '@lgm-app-core/services/auth.service';
 import { ILoginUser } from '@lgm-app-core/interface/auth.interface';
@@ -12,24 +12,28 @@ import { ILoginUser } from '@lgm-app-core/interface/auth.interface';
 })
 export class LoginComponent {
 
-  minCharacters = 6;
-  loginForm = new FormGroup({
-    email: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$')
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(this.minCharacters)
-    ])
-  });
+  loginForm: FormGroup;
+  minCharacters: number = 6;
+  pattern: string = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 
-  constructor(private authService: AuthService,
+  constructor(private fb: FormBuilder,
+              private authService: AuthService,
               // private sweetAlert: string,
-              private router: Router) { }
+              private router: Router) { 
+                this.loginForm = this.fb.group({
+                  email: ['', [
+                    Validators.required,
+                    Validators.pattern(this.pattern)
+                  ]],
+                  password: ['', [
+                    Validators.required,
+                    Validators.minLength(this.minCharacters)
+                  ]]
+                });
+  }
 
   // Abbreviation of loginForm.controls
-  get controls(): { [key: string]: AbstractControl; } {
+  get fm() {
     return this.loginForm.controls;
   }
 
@@ -40,7 +44,7 @@ export class LoginComponent {
         // Close Loading
 
         // SweetAlert Error
-        alert('Error: '+error);
+        alert('Error: '+error.message);
       })
     if(res) {
       // Close Loading

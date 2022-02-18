@@ -15,34 +15,10 @@ export class NavbarComponent implements OnInit {
 
   logged:boolean = false;
   uid = null! as string;
-  userInfo: IRegisterUser = null!
-  /* userInfo: IRegisterUser = {
-    uid: '',
-    name: '',
-    lastname: '',
-    birthday: '',
-    phone: 0,
-    email: '',
-    password: '',
-    domicilio: '',
-    curp: '',
-    rfc: '',
-    civilStatus: '',
-    scholarship: '',
-    accountNumber: 0,
-    employeeNumber: 0,
-    securityNumber: 0,
-    infonavit: false,    
-    emergencyNumber: 0,
-    photo: '',
-    rol: 'operator',
-    area: '',
-    jobDescription: ''
-  }; */
+  userInfo: IRegisterUser = null!;
+
   constructor( private authService: AuthService,
-              private firestore: FirestoreService,
-              // private sweetAlert: string,
-              private route: Router ) {  }
+              private firestore: FirestoreService ) {  }
 
   async ngOnInit() {
     this.authService.stateUser().subscribe( res => {
@@ -66,10 +42,11 @@ export class NavbarComponent implements OnInit {
   }
 
   getUserInfo() {
-    const path = 'Usuarios';
+    const path = 'users';
     const id = this.uid;
     this.firestore.getDoc<IRegisterUser>(path, id).subscribe( res => {
       if(res) {
+        console.log(res)
         this.userInfo = res;
       }
     });
@@ -79,10 +56,6 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.logged = false;
     this.authService.logout();
-    localStorage.removeItem('user');
-    // SweetAlert
-    alert('Sesión finalizada');
-    this.route.navigate(['/app']);
   }
   
 }
